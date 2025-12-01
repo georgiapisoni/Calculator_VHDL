@@ -4,8 +4,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity alu is
   Port (
-      clk                             : in std_logic;
-      rst                             : in std_logic;
+      --clk                             : in std_logic;
+      --rst                           : in std_logic;
       a, b                            : in signed(15 downto 0);   --input operands
       add, subtract, multiply, divide : in std_logic;
       r                               : out signed(15 downto 0)   --output
