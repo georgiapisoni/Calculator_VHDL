@@ -1,43 +1,35 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 28.11.2025 10:05:23
--- Design Name: 
--- Module Name: accumulator - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity accumulator is
---  Port ( );
+  Port (
+      clock                           : in std_logic;
+      reset                           : in std_logic;
+      acc_init                        : in std_logic;   --1 resets outputs
+      acc_enable                      : in std_logic;   --1 enables accumulator out
+      acc_in                          : in signed(15 downto 0);
+      acc_out                         : out signed(15 downto 0);                     
+  );
 end accumulator;
 
-architecture Behavioral of accumulator is
+architecture Behavioral of accumulator is begin
+-- question: use a separate register signal or just let it map to out?  
+-- signal acc_register : signes(15 downto 0); 
 
-begin
+  process ( clock, reset ) begin
+    if reset = '1' then
+      acc_out <= (others =>'0');
 
+    elsif rising_edge( clock ) then
+
+      if acc_init = '1' then               --output reset on
+        acc_out <= (others => '0');        --output zeroed
+      elsif acc_init = 0 and acc_enable = '1' then   
+        acc_out <= acc_in;                 --assigns input values to output
+      end if;
+    end if;
+  end process;
 
 end Behavioral;
