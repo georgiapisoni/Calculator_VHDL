@@ -84,7 +84,7 @@ architecture Behavioral of alu is
             end if;
         end if;
      end if;
+     r <= v_result;
   end process;
-  r <= v_result;
  
 end Behavioral;
