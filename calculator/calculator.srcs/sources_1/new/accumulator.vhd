@@ -10,12 +10,13 @@ entity accumulator is
       acc_init                        : in std_logic;   --1 resets outputs
       acc_enable                      : in std_logic;   --1 enables accumulator out
       acc_in                          : in signed(15 downto 0);
-      acc_out                         : out signed(15 downto 0);                     
+      acc_out                         : out signed(15 downto 0)                     
   );
 end accumulator;
 
 architecture Behavioral of accumulator is begin
 -- question: use a separate register signal or just let it map to out?  
+-- we can leave it like this (professor said its okay) 
 -- signal acc_register : signes(15 downto 0); 
 
   process ( clock, reset ) begin
@@ -24,9 +25,9 @@ architecture Behavioral of accumulator is begin
 
     elsif rising_edge( clock ) then
 
-      if acc_init = '1' then               --output reset on
+      if acc_init = '1' then               --output reset on 
         acc_out <= (others => '0');        --output zeroed
-      elsif acc_init = 0 and acc_enable = '1' then   
+      elsif acc_enable = '1' then   
         acc_out <= acc_in;                 --assigns input values to output
       end if;
     end if;
