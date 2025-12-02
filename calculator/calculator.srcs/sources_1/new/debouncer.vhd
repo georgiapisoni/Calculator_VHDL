@@ -7,7 +7,7 @@ entity debouncer is
     counter_size : integer := 12
   );
   port (
-    clock                           : in std_logic;
+    clk                           : in std_logic;
     reset                           : in std_logic;
     bouncy                          : in std_logic;
     pulse                           : out std_logic
@@ -24,13 +24,13 @@ architecture behavioral of debouncer is
 
 begin
 
-  process ( clock, reset ) begin
+  process ( clk, reset ) begin
     if reset = '1' then
       counter <= (others => '0');
       stable_value <= '0';
       candidate_value <= '0'; 
 
-    elsif rising_edge( clock ) then
+    elsif rising_edge( clk ) then
       -- Check whether the signal is stable
       if bouncy = candidate_value then
         -- Stable signal. Check for how long
@@ -51,10 +51,10 @@ begin
   end process;
 
   -- creates a DELAYED VERSION of the stable signal 
-  process ( clock, reset ) begin
+  process ( clk, reset ) begin
     if reset = '1' then
       delayed_stable_value <= '0';
-    elsif rising_edge( clock ) then
+    elsif rising_edge( clk ) then
       delayed_stable_value <= stable_value;
     end if;
   end process;
