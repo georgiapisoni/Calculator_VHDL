@@ -11,7 +11,7 @@ entity calcolatrice_testbench is
 end calcolatrice_testbench;
 
 architecture Behavioral of calcolatrice_testbench is
-  signal clock, reset : std_logic;
+  signal clk, reset : std_logic;
   signal SW : std_logic_vector( 15 downto 0 );
   signal LED : std_logic_vector( 15 downto 0 );
   signal CA, CB, CC, CD, CE, CF, CG, DP : std_logic;
@@ -21,7 +21,7 @@ begin
 
   -- Instantiate the dut
   dut : entity work.calcolatrice( Behavioral ) port map (
-    clock => clock,
+    clk => clk,
     reset => reset,
     SW => SW,
     LED => LED,
@@ -31,8 +31,8 @@ begin
   );
 
   process begin
-    clock <= '1'; wait for 5 ns;
-    clock <= '0'; wait for 5 ns;
+    clk <= '1'; wait for 5 ns;
+    clk <= '0'; wait for 5 ns;
   end process;
 
   process begin
