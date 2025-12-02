@@ -38,9 +38,9 @@ begin
    dut_test_proc : process
    begin
 
-      reset <= '0';
-      wait for 10 ns;
       reset <= '1';
+      wait for 10 ns;
+      reset <= '0';
       wait for 10 ns;
 
       bouncy <= '0';
