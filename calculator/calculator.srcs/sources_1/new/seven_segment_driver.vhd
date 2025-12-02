@@ -7,7 +7,7 @@ entity seven_segment_driver is
         size : integer := 20
     );
     Port (
-        clock  : in std_logic;
+        clk  : in std_logic;
         reset  : in std_logic; -- Nota: Logica Active Low (resetta se '0')
         digit0 : in std_logic_vector( 3 downto 0 );
         digit1 : in std_logic_vector( 3 downto 0 );
@@ -33,10 +33,10 @@ architecture Behavioral of seven_segment_driver is
 begin
 
     -- Processo divisore di clock
-    process ( clock, reset ) begin
+    process ( clk, reset ) begin
         if reset = '0' then
             flick_counter <= ( others => '0' );
-        elsif rising_edge( clock ) then
+        elsif rising_edge( clk ) then
             flick_counter <= flick_counter + 1;
         end if;
     end process;
