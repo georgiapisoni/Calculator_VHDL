@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity accumulator is
   Port (
-      clock                           : in std_logic;
+      clk                           : in std_logic;
       reset                           : in std_logic;
       acc_init                        : in std_logic;   --1 resets outputs
       acc_enable                      : in std_logic;   --1 enables accumulator out
@@ -19,11 +19,11 @@ architecture Behavioral of accumulator is begin
 -- we can leave it like this (professor said its okay) 
 -- signal acc_register : signes(15 downto 0); 
 
-  process ( clock, reset ) begin
+  process ( clk, reset ) begin
     if reset = '1' then
       acc_out <= (others =>'0');
 
-    elsif rising_edge( clock ) then
+    elsif rising_edge( clk ) then
 
       if acc_init = '1' then               --output reset on 
         acc_out <= (others => '0');        --output zeroed
