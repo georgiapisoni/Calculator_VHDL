@@ -34,7 +34,7 @@ begin
 
     -- Processo divisore di clock
     process ( clk, reset ) begin
-        if reset = '0' then
+        if reset = '1' then
             flick_counter <= ( others => '0' );
         elsif rising_edge( clk ) then
             flick_counter <= flick_counter + 1;
