@@ -4,7 +4,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity calcolatrice is
   Port (
-    CLK : in std_logic;
+    clk : in std_logic;
     RESET : in std_logic;
     SW : in std_logic_vector( 15 downto 0 );
     LED : out std_logic_vector( 15 downto 0 );
@@ -34,7 +34,7 @@ begin
   -- Instantiate buttons:
   center_detect : entity work.debouncer(Behavioral)
   port map (
-    clk   => CLK,
+    clk   => clk,
     reset   => SW(15),
     bouncy  => BTNC,
     pulse   => center_edge
@@ -42,7 +42,7 @@ begin
 
   up_detect : entity work.debouncer(Behavioral)
   port map (
-    clk   => CLK,
+    clk   => clk,
     reset   => SW(15),
     bouncy  => BTNU,
     pulse   => up_edge
@@ -50,7 +50,7 @@ begin
 
   down_detect : entity work.debouncer(Behavioral)
   port map (
-    clk   => CLK,
+    clk   => clk,
     reset   => SW(15),
     bouncy  => BTND,
     pulse   => down_edge
@@ -58,7 +58,7 @@ begin
 
   left_detect : entity work.debouncer(Behavioral)
   port map (
-    clk   => CLK,
+    clk   => clk,
     reset   => SW(15),
     bouncy  => BTNL,
     pulse   => left_edge
@@ -66,7 +66,7 @@ begin
 
   right_detect : entity work.debouncer(Behavioral)
   port map(
-    clk   => CLK,
+    clk   => clk,
     reset   => SW(15),
     bouncy  => BTNR,
     pulse   => right_edge
@@ -78,7 +78,7 @@ begin
      size => 21 
   )
   port map (
-    clk => CLK,
+    clk => clk,
     reset => SW(15),
     digit0 => display_value( 3 downto 0 ),
     digit1 => display_value( 7 downto 4 ),
@@ -112,15 +112,15 @@ begin
     r        => acc_in
     );
 
-  do_add  <= up_edge;
-  do_sub  <= left_edge;
-  do_mult <= right_edge;
-  do_div  <= down_edge;
+  do_add  <= up_edge; --addition up
+  do_sub  <= left_edge; --subtraction left
+  do_mult <= right_edge; -- multiply right
+  do_div  <= down_edge; -- division down
 
   -- Instantiate the accumulator  
   the_accumulator : entity work.accumulator( Behavioral )
   port map (
-    clk      => CLK,
+    clk      => clk,
     reset      => SW(15),
     acc_init   => acc_init,
     acc_enable => acc_enable,
